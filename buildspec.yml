@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION |
+        docker login --username AWS --password-stdin $REPOSITORY_URI
+  build:
+    commands:
+      - docker build -t calculator .
+      - docker tag calculator:latest $REPOSITORY_URI:latest
+  post_build:
+    commands:
+      - docker push $REPOSITORY_URI:latest
+      - printf '[{"name":"calculator","imageUri":"%s"}]' $REPOSITORY_URI:latest > imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
