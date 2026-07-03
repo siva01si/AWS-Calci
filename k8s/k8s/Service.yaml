@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  calciservice
+spec:
+  selector:
+    app:  calciapp
+  type:  LoadBalancer
+  ports:
+   - port:  8080
+     targetPort: 5000
