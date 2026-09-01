@@ -1,17 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploymentcalci
+  name: calculator
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: calciapp
+      app: calculator
   template:
     metadata:
       labels:
-        app: calciapp
+        app: calculator
     spec:
       containers:
-      - name: calciappcontainer
-        image: mycontainerregistry0103.azurecr.io/image01
+        - name: calculator
+          image: 179574745253.dkr.ecr.ap-south-1.amazonaws.com/myecr0103:latest
+          ports:
+            - containerPort: 5000
