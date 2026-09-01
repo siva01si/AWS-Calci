@@ -1,11 +1,11 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name:  calciservice
+  name: calculator-service
 spec:
+  type: LoadBalancer
   selector:
-    app:  calciapp
-  type:  LoadBalancer
+    app: calculator
   ports:
-   - port:  8080
-     targetPort: 5000
+    - port: 80
+      targetPort: 5000
